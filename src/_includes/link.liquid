@@ -1,0 +1,15 @@
+<li class="link">
+    <a href="{{raindrop.link}}">
+        {{raindrop.title}}
+        {% if raindrop.excerpt %}
+        <p class="description">
+            {{raindrop.excerpt}}
+        </p>
+        {% endif %}
+    </a>
+    {% if raindrop.note %}
+    <blockquote class="note">
+        {{raindrop.note}}
+    </blockquote>
+    {% endif %}
+</li>

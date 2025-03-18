@@ -15,7 +15,7 @@
         <nav id="everything">
             <ul>
             {% for raindrop in raindrops %}
-                <li>{{raindrop.title}}</li>
+                {% render "link.liquid", raindrop: raindrop %}
             {% endfor %}
             </ul>
         </nav>
