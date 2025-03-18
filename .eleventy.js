@@ -1,4 +1,4 @@
-//import {} from 'dotenv/config.js';
+import 'dotenv/config';
 import eleventyAutoCacheBuster from "eleventy-auto-cache-buster";
 import eleventyFavicons from "eleventy-favicons";
 import eleventySass from "@grimlink/eleventy-plugin-sass";
@@ -11,14 +11,6 @@ export const config = {
         output: "dist"
     }
 };
-
-try {
-    const data = await fetch (env.RAINDROP_URL);
-    //(?<=vite-plugin-ssr_pageContext.*?>).*?<\/script>
-    console.log(data.text())
-} catch {
-    throw new Error(`Couldn't get data from ${env.RAINDROP_URL}`);
-}
 
 
 export default function (eleventyConfig) {

@@ -12,7 +12,14 @@
         <h1>{{title}}</h1>
     </header>
     <main>
-        
+        <nav id="everything">
+            <ul>
+            {% for raindrop in raindrops %}
+                <li>{{raindrop.title}}</li>
+            {% endfor %}
+            </ul>
+        </nav>
+       
     </main>
 </body>
 </html>
