@@ -14,6 +14,8 @@ export const config = {
 
 
 export default function (eleventyConfig) {
+    eleventyConfig.addPassthroughCopy("src/assets/")
+
     eleventyConfig.addPlugin(eleventyAutoCacheBuster);
 
     eleventyConfig.addPlugin(eleventySass, {
