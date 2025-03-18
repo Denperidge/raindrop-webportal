@@ -1,0 +1,8 @@
+<nav id="{{id}}">
+    <h2>{{id}}</h2>
+    <ul>
+    {% for raindrop in raindrops %}
+        {%- render "link.liquid", raindrop: raindrop -%}
+    {% endfor %}
+    </ul>
+</nav>

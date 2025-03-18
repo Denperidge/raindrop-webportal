@@ -12,14 +12,16 @@
         <h1>{{title}}</h1>
     </header>
     <main>
-        <nav id="everything">
-            <ul>
-            {% for raindrop in raindrops %}
-                {% render "link.liquid", raindrop: raindrop %}
-            {% endfor %}
-            </ul>
-        </nav>
-       
+        {% for tag in tags %}
+            {% render "links.liquid",
+               id: tag,
+               raindrops: raindropsByTags[tag]
+            %}
+        {% endfor %}
+        {% render "links.liquid", 
+           id: "Everything",
+           raindrops: raindrops
+        %}
     </main>
 </body>
 </html>
