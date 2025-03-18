@@ -1,0 +1,17 @@
+{
+  "name": "raindrop-webportal",
+  "description": "Create a customisable, lightweight and statically built webportal that's maintainable using your bookmarks.Create a customisable, lightweight and statically built webportal that's maintainable using your bookmarks",
+  "author": "Denperidge",
+  "license": "MIT",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "@grimlink/eleventy-plugin-sass": "^1.0.3",
+    "eleventy-auto-cache-buster": "^0.8.1",
+    "eleventy-favicons": "^1.0.3",
+    "sass": "^1.85.1"
+  }
+}
