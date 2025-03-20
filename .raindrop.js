@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { downloadFavicon } from "./favicon-fetcher/favicon-fetcher.js";
+import downloadFavicon from "favicon-grabber";
 import { env } from "process"
 import {join} from "path";
 import { writeFile, createWriteStream } from "fs";

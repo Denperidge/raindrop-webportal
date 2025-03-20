@@ -3,3 +3,4 @@ node_modules/
 src/_data/raindrops.json
 dist/
 src/assets/*.ico
+src/assets/*.png
