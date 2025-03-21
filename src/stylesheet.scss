@@ -1,6 +1,16 @@
+$color-0: #eeb4b3ff;
+$color-1: #c179b9ff;
+$color-2: #a42cd6ff;
+$color-3: #502274ff;
+$color-4: #2f242cff;
+
 body {
-    background-color: #f2f2f2;
+    color: white;
+    background-color: $color-4;
+    background: linear-gradient(100deg, $color-2, $color-3);
     font-size: 16px;
+    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; 
+    font-weight: normal;
 }
 
 main {
@@ -16,19 +26,47 @@ h1 {
     text-align: center;
 }
 
+a {
+    &:link {
+        color: white;
+    }
+    &:visited {
+
+    }
+    &:hover {
+
+    }
+    &:active {
+
+    }
+}
+
+
 .links {
     min-width: 400px;
     margin: 10px;
+    padding: 10px;
     flex: 1;
+    background-color: $color-4;
+    border: 3px groove;
+
+    h2 {
+        margin-top: 3px;
+        text-align: right;
+        margin-right: 5px;
+    }
 
     &:nth-child(odd) {
+        border-color: $color-3;
         ul {
-            border-color: red;
+            border-color: $color-1;
         }
     }
     &:nth-child(even) {
+        border-color: $color-2;
         ul {
-            border-color: aqua;
+            //border-color: $color-0;
+            //border-style: double;
         }
     }
 
@@ -36,14 +74,23 @@ h1 {
         padding: 5px;
         list-style: none;
 
-        border: 3px solid;
+        //border: 3px solid;
 
         li:nth-child(even) {
-            //background-color: red;
+            background-color: $color-0;
         }
         li:nth-child(odd) {
-            background-color: aqua;
+            background-color: $color-1;
         }
+    }
+}
+
+.link {
+    padding: 5px;
+    .title {
+        display: inline;
+        font-weight: bold;
+        font-size: 1rem;
     }
 }
 
