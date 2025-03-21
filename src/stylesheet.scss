@@ -1,13 +1,16 @@
+@use 'sass:color';
+
 $color-0: #eeb4b3ff;
 $color-1: #c179b9ff;
 $color-2: #a42cd6ff;
 $color-3: #502274ff;
 $color-4: #2f242cff;
 
+
 body {
     color: white;
     background-color: $color-4;
-    background: linear-gradient(100deg, $color-2, $color-3);
+    background: linear-gradient(95deg, $color-1, $color-3);
     font-size: 16px;
     font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; 
     font-weight: normal;
@@ -57,7 +60,7 @@ a {
     }
 
     &:nth-child(odd) {
-        border-color: $color-3;
+        border-color: $color-2;
         ul {
             border-color: $color-1;
         }
@@ -76,17 +79,19 @@ a {
 
         //border: 3px solid;
 
-        li:nth-child(even) {
-            background-color: $color-0;
-        }
-        li:nth-child(odd) {
-            background-color: $color-1;
-        }
+        
     }
 }
 
 .link {
     padding: 5px;
+    &:nth-child(even) {
+        background-color: color.scale($color-2, $alpha:-35%);
+        
+    }
+    &:nth-child(odd) {
+        background-color: color.scale($color-3, $alpha:-35%);
+    }
     .title {
         display: inline;
         font-weight: bold;
