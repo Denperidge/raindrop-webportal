@@ -1,6 +1,8 @@
 <li class="link">
-    <span>{{assetsDir}}</span>
-    <img src="assets/{{faviconDict[raindrop._id]}}" />
+    {% assign img = faviconDict[raindrop._id] %}
+    {% if img %}
+    <img class="favicon" src="assets/{{img}}" />
+    {% endif %}
     <a href="{{raindrop.link}}">
         {{raindrop.title}}
         {% if raindrop.excerpt %}
