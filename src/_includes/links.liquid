@@ -2,7 +2,7 @@
     <h2>{{id}}</h2>
     <ul>
     {% for raindrop in raindrops %}
-        {%- render "link.liquid", raindrop: raindrop -%}
+        {%- render "link.liquid", raindrop: raindrop, faviconDict: faviconDict -%}
     {% endfor %}
     </ul>
 </nav>

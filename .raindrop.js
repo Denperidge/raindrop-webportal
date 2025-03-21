@@ -1,10 +1,7 @@
 import 'dotenv/config';
 import downloadFavicon from "favicon-grabber";
 import { env } from "process"
-import {join} from "path";
-import { writeFile, createWriteStream } from "fs";
-import { Readable } from "stream";
-import { finished } from "stream/promises";
+import { writeFile } from "fs";
 
 const OUTPUT_FILEPATH = "src/_data/raindrops.json";
 
@@ -12,19 +9,21 @@ const REGEX_GET_COLLECTIONS = RegExp(/(?<=vite-plugin-ssr_pageContext.*?>).*?(?=
 const REGEX_GET_ICO = RegExp(/(?<=href=").*?\.ico/);
 
 
-let contents;
+let raindropCollectionHtml;
 try {
     const data = await fetch (env.RAINDROP_URL);
-    contents = await data.text();
+    raindropCollectionHtml = await data.text();
 } catch (e) {
     console.error(`Couldn't finish getting data from ${env.RAINDROP_URL}`);
     throw e;
 }
 
-const data = JSON.parse(
-    contents.match(REGEX_GET_COLLECTIONS)[0]
+const raindropCollectionData = JSON.parse(
+    raindropCollectionHtml.match(
+        REGEX_GET_COLLECTIONS
+    )[0]
 );
-const relevantRaindrops = data.pageContext.pageProps.raindrops.items;
+const relevantRaindrops = raindropCollectionData.pageContext.pageProps.raindrops.items;
 
 writeFile(
     OUTPUT_FILEPATH,

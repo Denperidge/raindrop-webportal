@@ -16,12 +16,14 @@
         {% for tag in tags %}
             {% render "links.liquid",
                id: tag,
-               raindrops: raindropsByTags[tag]
-            %}
+               raindrops: raindropsByTags[tag],
+               faviconDict: faviconDict
+           %}
         {% endfor %}
         {% render "links.liquid", 
            id: "Everything",
-           raindrops: raindrops
+           raindrops: raindrops,
+           faviconDict: faviconDict
         %}
     </main>
 </body>
