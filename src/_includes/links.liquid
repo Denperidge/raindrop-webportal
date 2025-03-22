@@ -1,5 +1,7 @@
 <nav id="{{id}}" class="links">
-    <h2>{{id}}</h2>
+    <a href="#{{id}}">
+        <h2>{{id}}</h2>
+    </a>
     <ul>
     {% for raindrop in raindrops %}
         {%- render "link.liquid", raindrop: raindrop, faviconDict: faviconDict -%}
