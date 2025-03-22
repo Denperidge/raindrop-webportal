@@ -23,11 +23,7 @@ function onTagChange(tagInputId, tagInputChecked) {
     if (enabledTags.length == 0) {
         dynamicStyle.innerText = "";
     } else {
-        let style = ".link";
-        for (let i=0; i < enabledTags.length; i++) {
-            style += ":not(." + enabledTags[i] + ")"
-        }
-        style += " { display: none; }";
+        let style = "nav:not(#" + enabledTags.join(" #") + ") { display: none; }";
         dynamicStyle.innerText = style;
     }
     /*
