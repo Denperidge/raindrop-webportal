@@ -22,7 +22,7 @@ PR's for the above and anything else are more than welcome!
 
 ### `no-js` mode
 - This is the default option* (and disabled by JavaScript)
-- Hides all `js-only` elements using CSS
+- (CSS) Hides all `js-only` elements
 - Tag buttons on the top are `<a href="#">` hyperlinks to their respective nav elements
 - This means that - while no-js does not have the filter capabilities - it has an identical visual/presentation to the JavaScript counterpart
 
@@ -30,10 +30,10 @@ PR's for the above and anything else are more than welcome!
 
 ### `js-only` mode
 If [index.js](src/assets/index.js) gets loaded by the browser, `js-only` mode is activated
-- Hides all `no-js` elements using CSS
+- (CSS) Hides all `no-js` elements
 - The tag buttons are now `<label role="button">` elements. Pressing a label...
     - ... checks/unchecks its respective hidden `<input type="checkbox" id="tag-tagName">`
-    - The input onchange event triggers a JS function that sets the contents of a `<style>` element, handling the temporary changes using css:
+    - (JS) The input onchange event triggers a JS function that sets the contents of a `<style>` element, handling the temporary changes using CSS:
         - (CSS) Nav blocks from non-selected tags are hidden
         - (CSS) Links within shown nav blocks that do not have all selected tags have their opacity
         - (JS) Sets `aria-pressed` for all labels with the same tag based on the
