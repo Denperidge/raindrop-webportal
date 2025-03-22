@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{% assign title = process.env.title | default: "Raindrop.io Webportal" %}
+{% assign title = env.RWP_TITLE | default: "Raindrop.io Webportal" %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -31,6 +31,7 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy(ASSETS_DIR);
     eleventyConfig.addGlobalData("assetsDir", ASSETS_DIR)
     eleventyConfig.addGlobalData("faviconDict", faviconDict)
+    eleventyConfig.addGlobalData("env", env)
 
     eleventyConfig.addPlugin(eleventyAutoCacheBuster);
 
