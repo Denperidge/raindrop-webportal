@@ -14,6 +14,18 @@ body {
     font-size: 16px;
     font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; 
     font-weight: normal;
+
+    &.js-only {
+        .no-js {
+            display: none;
+        }
+    }
+
+    &.no-js {
+        .js-only {
+            display: none;
+        }
+    }
 }
 
 main {
@@ -46,6 +58,29 @@ a {
     }
 }
 
+#tags {
+    display: flex;
+    padding: 0px 10px;
+    justify-content: space-between;
+
+    list-style: none;
+    
+    input {
+        display: none;
+    }
+}
+
+.taglabel {
+    display: block;
+    padding: 10px;
+    border: 1px groove $color-3;
+    border-radius: 20px;
+    background-color: $color-2;
+    &[aria-pressed="true"] {
+        color: black;
+        background-color: $color-0;
+    }
+}
 
 .links {
     min-width: 400px;

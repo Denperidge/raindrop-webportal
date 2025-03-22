@@ -20,9 +20,17 @@
     <meta name="generator" content="{{ eleventy.generator }}">
     <link rel="stylesheet" href="/stylesheet.css">
 </head>
-<body>
+<body class="no-js">
     <header>
         <h1>{{title}}</h1>
+        <ul id="tags">
+            {% for tag in tags %}
+            <li>
+                <input id="tag-{{tag | slugify}}" type="checkbox"/>
+                {% render "taglabel.liquid", tag: tag %}
+            </li>
+            {% endfor %}
+        </ul>
     </header>
     <main>
         {% for tag in tags %}
@@ -38,5 +46,6 @@
            faviconDict: faviconDict
         %}
     </main>
+    <script src="assets/index.js"></script>
 </body>
 </html>

@@ -1,0 +1,9 @@
+<label
+    class="taglabel js-only"
+    tabindex="0"
+    role="button"
+    aria-pressed="false"
+    for="tag-{{tag | slugify}}">
+    {{tag}}
+</label>
+<a class="taglabel no-js" href="#{{tag | slugify}}">{{tag}}</a>

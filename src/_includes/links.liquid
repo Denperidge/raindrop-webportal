@@ -1,6 +1,7 @@
-{% assign titleId = "title-" | concat: id %}
-<nav id="{{id}}" class="links" aria-labelledby="{{titleId}}">
-    <a href="#{{id}}">
+{% assign tag = id | slugify %}
+{% assign titleId = "title-" | concat: tag %}
+<nav id="{{tag}}" class="links" aria-labelledby="{{titleId}}">
+    <a href="#{{tag}}">
         <h2 id="{{titleId}}">{{id}}</h2>
     </a>
     <ul>

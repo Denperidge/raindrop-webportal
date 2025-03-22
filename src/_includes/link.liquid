@@ -1,4 +1,4 @@
-<li class="link">
+<li class="link{% for tag in raindrop.tags %} {{tag|slugify}}{% endfor%}">
     {% assign img = faviconDict[raindrop._id] %}
     {% if img %}
     <img class="favicon" src="assets/{{img}}" />
@@ -16,4 +16,12 @@
         {{raindrop.note}}
     </blockquote>
     {% endif %}
+    <ul class="tags">
+        {% for tag in raindrop.tags %}
+        <li>
+            {% render "taglabel.liquid", tag: tag %}
+
+        </li>    
+        {% endfor %}
+    </ul>
 </li>
