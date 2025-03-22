@@ -30,17 +30,19 @@ h1 {
 }
 
 a {
+    text-underline-offset: 4px;
     &:link {
         color: white;
     }
     &:visited {
-
+        color: white;
+        text-decoration-color: $color-0;
     }
     &:hover {
-
+        color: $color-1;
     }
     &:active {
-
+        color: $color-3;
     }
 }
 
