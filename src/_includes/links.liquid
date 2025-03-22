@@ -1,6 +1,7 @@
-<nav id="{{id}}" class="links">
+{% assign titleId = "title-" | concat: id %}
+<nav id="{{id}}" class="links" aria-labelledby="{{titleId}}">
     <a href="#{{id}}">
-        <h2>{{id}}</h2>
+        <h2 id="{{titleId}}">{{id}}</h2>
     </a>
     <ul>
     {% for raindrop in raindrops %}
