@@ -51,6 +51,8 @@ jobs:
         run: npm run build
         env:
           RWP_TITLE: ${{ secrets.RWP_TITLE }}
+          RWP_DESCRIPTION: ${{ secrets.RWP_DESCRIPTION }}
+          RWP_BASE_URL: ${{ secrets.RWP_BASE_URL }}
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

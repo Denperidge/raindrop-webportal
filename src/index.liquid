@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 {% assign title = env.RWP_TITLE | default: "Raindrop.io Webportal" %}
+{% assign description = env.RWP_DESCRIPTION | default: "A webportal generated from a Raindrop.io collection" %}
+{% assign webportalUrl = env.RWP_BASE_URL %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>{{title}}</title>
+    <meta name="og:title" content="{{title}}">
+    <meta name="description" content="{{description}}">
+    <meta name="og:description" content="{{description}}">
+    <meta name="og:type" content="website">
+    <meta name="og:url" content="{{webportalUrl}}">
+    <meta name="og:site_name" content="{{title}}">
+    <!--og:image-->
+    <link rel="canonical" href="{{webportalUrl}}">
+    
     <meta name="generator" content="{{ eleventy.generator }}">
     <link rel="stylesheet" href="/stylesheet.css">
 </head>
