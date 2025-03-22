@@ -23,7 +23,13 @@ function onTagChange(tagInputId, tagInputChecked) {
     if (enabledTags.length == 0) {
         dynamicStyle.innerText = "";
     } else {
-        let style = "nav:not(#" + enabledTags.join(" #") + ") { display: none; }";
+        let style = ".link:not(." + enabledTags.join(".") + ") { opacity: 0.4; }";
+        style += " nav"
+        for (let i=0; i < enabledTags.length; i++) {
+            style += ":not(#" + enabledTags[i] + ")"
+        }
+        style += " { display: none; }";
+
         dynamicStyle.innerText = style;
     }
     /*
