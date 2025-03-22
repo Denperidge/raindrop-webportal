@@ -22,6 +22,7 @@
 </head>
 <body class="no-js">
     <header>
+        <a class="sr-only skip-link" href="#main">Skip to main content</a>
         <h1>{{title}}</h1>
         <ul id="tags" class="tags">
             {% for tag in tags %}
@@ -32,7 +33,7 @@
             {% endfor %}
         </ul>
     </header>
-    <main>
+    <main id="main">
         {% for tag in tags %}
             {% render "links.liquid",
                id: tag,

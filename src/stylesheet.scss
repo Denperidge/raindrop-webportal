@@ -6,6 +6,28 @@ $color-2: #a42cd6ff;
 $color-3: #502274ff;
 $color-4: #2f242cff;
 
+/* Based on https://webaim.org/techniques/css/invisiblecontent/ & https://www.w3schools.com/accessibility/accessibility_skip_links.php */
+.sr-only {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.skip-link:focus {
+    left: 0;
+    top: 0;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    background-color: $color-4;
+}
+
+.skip-link:link, .skip-link:visited, .skip-link:hover, .skip-link:active {
+    color: white;  /* Normalise the color */
+}
 
 body {
     margin: 0;
