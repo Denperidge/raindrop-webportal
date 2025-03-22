@@ -8,6 +8,7 @@ $color-4: #2f242cff;
 
 
 body {
+    margin: 0;
     color: white;
     background-color: $color-4;
     background: linear-gradient(95deg, $color-1, $color-3);
@@ -37,6 +38,13 @@ main {
     flex-wrap: wrap;
 }
 
+@media screen and (orientation: portrait) {
+    main {
+        width: 100%;
+        margin: 0;
+    }
+}
+
 h1 {
     text-align: center;
 }
@@ -58,16 +66,21 @@ a {
     }
 }
 
-#tags {
+.tags {
     display: flex;
     padding: 0px 10px;
     justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
 
     list-style: none;
     
     input {
         display: none;
     }
+}
+.link .tags {
+    justify-content: flex-start;
 }
 
 .taglabel {
@@ -83,7 +96,7 @@ a {
 }
 
 .links {
-    min-width: 400px;
+    min-width: 40vw;
     margin: 10px;
     padding: 10px;
     flex: 1;

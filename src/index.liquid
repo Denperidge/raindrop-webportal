@@ -23,7 +23,7 @@
 <body class="no-js">
     <header>
         <h1>{{title}}</h1>
-        <ul id="tags">
+        <ul id="tags" class="tags">
             {% for tag in tags %}
             <li>
                 <input id="tag-{{tag | slugify}}" type="checkbox"/>
