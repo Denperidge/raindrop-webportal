@@ -3,13 +3,13 @@ import downloadFavicon, { downloadFaviconFromWebpage } from "favicon-grabber";
 import { env } from "process"
 import { writeFile } from "fs";
 
-const OUTPUT_FILEPATH = "src/_data/raindrops.json";
+const DATA_DIR = "src/_data/raindrops/";
 const REGEX_GET_COLLECTIONS = RegExp(/(?<=vite-plugin-ssr_pageContext.*?>).*?(?=<\/script>)/)
 
-async function getRaindropCollectionData() {
+async function getRaindropCollectionData(raindropUrl, filename="index") {
     let raindropCollectionHtml;
     try {
-        const data = await fetch (env.RAINDROP_URL);
+        const data = await fetch(raindropUrl);
         raindropCollectionHtml = await data.text();
     } catch (e) {
         console.error(`Couldn't finish getting data from ${env.RAINDROP_URL}`);
@@ -24,29 +24,38 @@ async function getRaindropCollectionData() {
     const relevantRaindrops = raindropCollectionData.pageContext.pageProps.raindrops.items;
 
     writeFile(
-        OUTPUT_FILEPATH,
+        DATA_DIR + filename + ".json",
         JSON.stringify(relevantRaindrops),
         { encoding: "utf-8" },
         (e) => {
             if (e) { throw e; }
-            else { console.log("Done! Wrote to " + OUTPUT_FILEPATH); }
+            else { console.log("Done! Wrote to " + DATA_DIR); }
         }
     );
 
     return relevantRaindrops;
 }
 
-const raindrops = await getRaindropCollectionData();
+function getRaindropFavicons(raindropArray) {
+    raindropArray.forEach(async raindrop => {
+        let downloadFunc = downloadFavicon;
+        if (raindrop.link.includes("transreads", "https://transreads.org/")) {
+            downloadFunc = downloadFaviconFromWebpage        
+        }
+        try {
+            const output = await downloadFunc(raindrop.link, `src/assets/${raindrop._id}%extname%`)
+            console.log(`Downloaded favicon for ${raindrop.link} to ${output}`)
+        } catch (e) {
+            console.log(e)
+        }
+    });
+}
 
-raindrops.forEach(async raindrop => {
-    let downloadFunc = downloadFavicon;
-    if (raindrop.link.includes("transreads", "https://transreads.org/")) {
-        downloadFunc = downloadFaviconFromWebpage        
-    }
-    try {
-        const output = await downloadFunc(raindrop.link, `src/assets/${raindrop._id}%extname%`)
-        console.log(`Downloaded favicon for ${raindrop.link} to ${output}`)
-    } catch (e) {
-        console.log(e)
-    }
-});
+getRaindropCollectionData(env.RAINDROP_URL).then(getRaindropFavicons).catch(console.log);
+if (env.RAINDROP_SUBPAGES_URLS) {
+    const raindropSubpageUrls = env.RAINDROP_SUBPAGES_URLS.split(",");
+    raindropSubpageUrls.forEach((nameAndUrl) => {
+        const [ name, url ] = nameAndUrl.split("@", 2)
+        getRaindropCollectionData(url, name).then(getRaindropFavicons).catch(console.log)
+    })
+}
