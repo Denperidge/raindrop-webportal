@@ -92,6 +92,20 @@ a {
     }
 }
 
+hr {
+    border-color: $color-0;
+}
+
+#site-navigation {
+    ul {
+        display: flex;
+        list-style: none;
+        justify-content: space-around;
+        font-size: 1.3em;
+        margin-bottom: 10px;
+    }
+}
+
 .tags {
     display: flex;
     padding: 0px 10px;

@@ -33,6 +33,22 @@ eleventyComputed:
     <header>
         <a class="sr-only skip-link" href="#main">Skip to main content</a>
         <h1>{{title}}</h1>
+
+        {% if pages.length > 1 %}
+        {% assign siteNavId = "site-navigation" %}
+        <nav id="{{siteNavId}}" aria-labelledby="{{siteNavId}}-title">
+            <h2 id="{{siteNavId}}-title" class="sr-only">Site navigation</h2>
+            <ul>
+                {% for page in pages %}
+                <li>
+                    <a href="/{{page.pageName}}">{{page.pageName | default: "home" | capitalize}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            <hr>
+        </nav>
+        {% endif %}
+
         <ul id="tags" class="tags">
             {% for tag in page.tags %}
             <li>
