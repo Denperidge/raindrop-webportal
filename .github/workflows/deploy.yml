@@ -45,6 +45,7 @@ jobs:
       - name: Fetch data from Raindrop.io
         run: npm run data
         env:
+          CI: true
           RAINDROP_URLS: ${{ secrets.RAINDROP_URLS }}
       
       - name: Build

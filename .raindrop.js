@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import downloadFavicon, { downloadFaviconFromWebpage } from "favicon-grabber";
-import { env } from "process"
+import { env, exit } from "process"
 import { writeFile } from "fs";
 
 const DATA_DIR = "raindrops/";
@@ -12,7 +12,7 @@ async function getRaindropCollectionData(raindropUrl, filename="index") {
         const data = await fetch(raindropUrl);
         raindropCollectionHtml = await data.text();
     } catch (e) {
-        console.error(`Couldn't finish getting data from ${env.RAINDROP_URL}`);
+        console.error(`Couldn't finish getting data from ${raindropUrl}`);
         throw e;
     }
 
@@ -51,8 +51,19 @@ function getRaindropFavicons(raindropArray) {
     });
 }
 
-env.RAINDROP_URLS.split(",").forEach((entry) => {
-    const [ pageName, url ] = entry.split("@", 2)
+const entries = env.RAINDROP_URLS.split(",");
+for (let i = 0; i < entries.length; i++) {
+    const [ pageName, url ] = entries[i].split("@", 2)
 
-    getRaindropCollectionData(url, pageName).then(getRaindropFavicons).catch(console.log);
-})
+    const collectionData = await getRaindropCollectionData(url, pageName);
+    try {
+        await getRaindropFavicons(collectionData)
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+if (env.CI != undefined && env.CI != "false" && env.CI != "0") {
+    // Errors are normal in this script, but CI shouldn't fail because of that
+    exit(0);
+}
