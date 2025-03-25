@@ -51,11 +51,8 @@ function getRaindropFavicons(raindropArray) {
     });
 }
 
-getRaindropCollectionData(env.RAINDROP_URL).then(getRaindropFavicons).catch(console.log);
-if (env.RAINDROP_SUBPAGES_URLS) {
-    const raindropSubpageUrls = env.RAINDROP_SUBPAGES_URLS.split(",");
-    raindropSubpageUrls.forEach((nameAndUrl) => {
-        const [ name, url ] = nameAndUrl.split("@", 2)
-        getRaindropCollectionData(url, name).then(getRaindropFavicons).catch(console.log)
-    })
-}
+env.RAINDROP_URLS.split(",").forEach((entry) => {
+    const [ pageName, url ] = entry.split("@", 2)
+
+    getRaindropCollectionData(url, pageName).then(getRaindropFavicons).catch(console.log);
+})

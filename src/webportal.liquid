@@ -1,7 +1,14 @@
-{% assign rpCollectionName = "index" %}
+---
+pagination:
+    data: pages
+    alias: page
+    size: 1
+eleventyComputed:
+    permalink: "{{page.pageName}}/index.html"
+---
 <!DOCTYPE html>
 <html lang="en">
-{% assign raindrops = raindrops[rpCollectionName] %}
+{% assign raindrops = page.raindrops %}
 {% assign title = env.RWP_TITLE | default: "Raindrop.io Webportal" %}
 {% assign description = env.RWP_DESCRIPTION | default: "A webportal generated from a Raindrop.io collection" %}
 {% assign webportalUrl = env.RWP_BASE_URL %}
@@ -27,7 +34,7 @@
         <a class="sr-only skip-link" href="#main">Skip to main content</a>
         <h1>{{title}}</h1>
         <ul id="tags" class="tags">
-            {% for tag in tags[rpCollectionName] %}
+            {% for tag in page.tags %}
             <li>
                 <input id="tag-{{tag | slugify}}" type="checkbox"/>
                 {% render "taglabel.liquid", tag: tag %}
@@ -36,22 +43,22 @@
         </ul>
     </header>
     <main id="main">
-        {% for tag in tags[rpCollectionName] %}
+        {% for tag in page.tags %}
             {% render "links.liquid",
                id: tag,
-               raindrops: raindropsByTags[tag],
+               raindrops: page.raindropsByTags[tag],
                faviconDict: faviconDict
            %}
         {% endfor %}
         {% render "links.liquid", 
            id: "Everything",
-           raindrops: raindrops,
+           raindrops: page.raindrops,
            faviconDict: faviconDict
         %}
     </main>
     <footer>
         <a href="https://github.com/Denperidge/raindrop-webportal">Source code</a>
     </footer>
-    <script src="assets/index.js"></script>
+    <script src="/assets/index.js"></script>
 </body>
 </html>
