@@ -7,7 +7,7 @@ import { env } from "process"
 import { readdirSync, readFileSync } from "fs";
 import { basename, extname } from "path";
 
-const ASSETS_DIR = "src/assets/";
+const ASSETS_DIR = "src/_assets/";
 
 function generateFaviconDict(dir) {
     const files = readdirSync(dir);

@@ -29,7 +29,7 @@ PR's for the above and anything else are more than welcome!
 \*: This has has been done before by many people smarter than me 
 
 ### `js-only` mode
-If [index.js](src/assets/index.js) gets loaded by the browser, `js-only` mode is activated
+If [index.js](src/_assets/index.js) gets loaded by the browser, `js-only` mode is activated
 - (CSS) Hides all `no-js` elements
 - The tag buttons are now `<label role="button">` elements. Pressing a label...
     - ... checks/unchecks its respective hidden `<input type="checkbox" id="tag-tagName">`

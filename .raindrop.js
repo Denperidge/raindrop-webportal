@@ -43,7 +43,7 @@ function getRaindropFavicons(raindropArray) {
             downloadFunc = downloadFaviconFromWebpage        
         }
         try {
-            const output = await downloadFunc(raindrop.link, `src/assets/${raindrop._id}%extname%`)
+            const output = await downloadFunc(raindrop.link, `src/_assets/${raindrop._id}%extname%`)
             console.log(`Downloaded favicon for ${raindrop.link} to ${output}`)
         } catch (e) {
             console.log(e)

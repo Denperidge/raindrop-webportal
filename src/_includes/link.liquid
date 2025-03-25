@@ -1,7 +1,7 @@
 <li class="link{% for tag in raindrop.tags %} {{tag|slugify}}{% endfor%}">
     {% assign img = faviconDict[raindrop._id] %}
     {% if img %}
-    <img class="favicon" src="assets/{{img}}" />
+    <img class="favicon" src="/_assets/{{img}}" />
     {% endif %}
     <a href="{{raindrop.link}}">
         <h3 class="title">{{raindrop.title}}</h3>
