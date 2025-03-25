@@ -23,21 +23,23 @@ async function getRaindropCollectionData(raindropUrl, filename="index") {
     );
     const relevantRaindrops = raindropCollectionData.pageContext.pageProps.raindrops.items;
 
+    const dest = DATA_DIR + filename + ".json";
     writeFile(
-        DATA_DIR + filename + ".json",
+        dest,
         JSON.stringify(relevantRaindrops),
         { encoding: "utf-8" },
         (e) => {
             if (e) { throw e; }
-            else { console.log("Done! Wrote to " + DATA_DIR); }
+            else { console.log("Done! Wrote to " + dest); }
         }
     );
 
     return relevantRaindrops;
 }
 
-function getRaindropFavicons(raindropArray) {
-    raindropArray.forEach(async raindrop => {
+async function getRaindropFavicons(raindropArray) {
+    for (let i = 0; i < raindropArray.length; i++) {
+        const raindrop = raindropArray[i];
         let downloadFunc = downloadFavicon;
         if (raindrop.link.includes("transreads", "https://transreads.org/")) {
             downloadFunc = downloadFaviconFromWebpage        
@@ -48,7 +50,7 @@ function getRaindropFavicons(raindropArray) {
         } catch (e) {
             console.log(e)
         }
-    });
+    };
 }
 
 const entries = env.RAINDROP_URLS.split(",");
