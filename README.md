@@ -40,6 +40,12 @@ If [index.js](src/_assets/index.js) gets loaded by the browser, `js-only` mode i
             - (CSS) The base stylesheet styles the `[aria-pressed=true]` buttons differently. This way visual feedback and accessibility data is directly linked!
         - (JS) Side note: to replicate `<a>` keyboard-navigation behaviour on the filter tag buttons, pressing `Enter` with them selected triggers a `click`. This is not a problem in no-js mode, as `<a href="">` is used there
 
+
+### Loading data from [.eleventy.js](.eleventy.js) instead of using Eleventy's data directory
+This is mostly due to the tags requiring a build-time computation (finding out what tags there are, sorting raindrops per tag, etc.).
+
+While this can be done using Eleventy's computed data, it (sadly) does *not* play nice with that computed data being used for front-matter pagination data. Manual data reading it is! 
+
 ## How-to
 ### Getting started
 This requires [Node.js](https://nodejs.org/) and [git](https://git-scm.com/) to be installed.

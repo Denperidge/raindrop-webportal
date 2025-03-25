@@ -3,7 +3,7 @@ import downloadFavicon, { downloadFaviconFromWebpage } from "favicon-grabber";
 import { env } from "process"
 import { writeFile } from "fs";
 
-const DATA_DIR = "src/_data/raindrops/";
+const DATA_DIR = "raindrops/";
 const REGEX_GET_COLLECTIONS = RegExp(/(?<=vite-plugin-ssr_pageContext.*?>).*?(?=<\/script>)/)
 
 async function getRaindropCollectionData(raindropUrl, filename="index") {

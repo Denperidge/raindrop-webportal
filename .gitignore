@@ -1,6 +1,6 @@
 .env
 node_modules/
-src/_data/raindrops/*.json
+raindrops/*.json
 src/_assets/*.ico
 src/_assets/*.png
 dist/

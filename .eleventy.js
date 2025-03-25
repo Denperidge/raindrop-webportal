@@ -34,7 +34,7 @@ function getTagsFromData(raindropArray) {
 }
 
 function getPageCollectionData(collectionName) {
-    const raindrops = JSON.parse(readFileSync(`src/_data/raindrops/${collectionName}.json`));
+    const raindrops = JSON.parse(readFileSync(`raindrops/${collectionName}.json`));
     const tags = getTagsFromData(raindrops);
 
     const raindropsByTags = {};
