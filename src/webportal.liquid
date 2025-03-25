@@ -21,10 +21,10 @@ eleventyComputed:
     <meta name="description" content="{{description}}">
     <meta name="og:description" content="{{description}}">
     <meta name="og:type" content="website">
-    <meta name="og:url" content="{{webportalUrl}}">
+    <meta name="og:url" content="{{webportalUrl}}{{page.url}}">
     <meta name="og:site_name" content="{{title}}">
     <!--og:image-->
-    <link rel="canonical" href="{{webportalUrl}}">
+    <link rel="canonical" href="{{webportalUrl}}{{page.url}}">
     
     <meta name="generator" content="{{ eleventy.generator }}">
     <link rel="stylesheet" href="/stylesheet.css">

@@ -51,6 +51,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
+          RAINDROP_URLS: ${{ secrets.RAINDROP_URLS }}
           RWP_TITLE: ${{ secrets.RWP_TITLE }}
           RWP_DESCRIPTION: ${{ secrets.RWP_DESCRIPTION }}
           RWP_BASE_URL: ${{ secrets.RWP_BASE_URL }}
