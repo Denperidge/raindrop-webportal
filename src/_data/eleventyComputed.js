@@ -18,6 +18,14 @@ function returnPerCollection(data, callback) {
 }
 
 export default {
+    raindropCollectionNames: (data) => {
+        const keys = Object.keys(data.raindrops);
+        if (keys.length < 1) {
+            console.error("No raindrops found")
+            return;
+        }
+        return keys;
+    },
     tags: (data) => {
         if (Object.keys(data.raindrops).length < 1) {
             console.error("No raindrops found")
@@ -25,10 +33,10 @@ export default {
         }
 
         const tags = returnPerCollection(data, function(raindrops) {
-            console.log(raindrops)
             return getTagsFromData(raindrops)
         })
         console.log(tags)
+        return tags;
     },
     raindropsByTags: (data) => {
         return;
