@@ -64,8 +64,3 @@ for (let i = 0; i < entries.length; i++) {
         console.log(e)
     }
 }
-
-if (env.CI != undefined && env.CI != "false" && env.CI != "0") {
-    // Errors are normal in this script, but CI shouldn't fail because of that
-    exit(0);
-}
