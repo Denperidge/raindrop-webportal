@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import downloadFavicon, { downloadFaviconFromWebpage } from "favicon-grabber";
-import { env, exit } from "process"
+import { env } from "process"
 import { writeFile } from "fs";
 
 const DATA_DIR = "raindrops/";
@@ -57,10 +57,7 @@ const entries = env.RAINDROP_URLS.split(",");
 for (let i = 0; i < entries.length; i++) {
     const [ pageName, url ] = entries[i].split("@", 2)
 
-    const collectionData = await getRaindropCollectionData(url, pageName);
-    try {
-        await getRaindropFavicons(collectionData)
-    } catch (e) {
-        console.log(e)
-    }
+    getRaindropCollectionData(url, pageName).then(async (collectionData) => {
+        getRaindropFavicons(collectionData).catch((e) => {console.log(e)})
+    }).catch((e) => {console.log(e)})
 }

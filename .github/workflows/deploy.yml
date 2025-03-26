@@ -48,7 +48,7 @@ jobs:
           RAINDROP_URLS: ${{ secrets.RAINDROP_URLS }}
       
       - name: Build
-        run: npm run build || true  # Ignore error
+        run: npm run build
         env:
           RAINDROP_URLS: ${{ secrets.RAINDROP_URLS }}
           RWP_TITLE: ${{ secrets.RWP_TITLE }}
