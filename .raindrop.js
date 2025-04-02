@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import downloadFavicon, { downloadFaviconFromWebpage } from "favicon-grabber";
+import downloadFavicon, { downloadFaviconFromWebpage, downloadFaviconFromDuckduckgo } from "favicon-grabber";
 import { env } from "process"
 import { writeFile } from "fs";
 
@@ -40,12 +40,20 @@ async function getRaindropCollectionData(raindropUrl, filename="index") {
 async function getRaindropFavicons(raindropArray) {
     for (let i = 0; i < raindropArray.length; i++) {
         const raindrop = raindropArray[i];
+        const overrides = {};
         let downloadFunc = downloadFavicon;
+
         if (raindrop.link.includes("transreads", "https://transreads.org/")) {
             downloadFunc = downloadFaviconFromWebpage        
+        } else if (raindrop.link.includes("queerjs")) {
+            overrides.searchMetaTags = true;
+            overrides.ignoreContentTypeHeader = true;
+        } else if (raindrop.link.includes("https://beeldbank.kortrijk.be/portal/media")) {
+            downloadFunc= downloadFaviconFromDuckduckgo;
         }
+
         try {
-            const output = await downloadFunc(raindrop.link, `src/_assets/${raindrop._id}%extname%`)
+            const output = await downloadFunc(raindrop.link, `src/_assets/${raindrop._id}%extname%`, overrides)
             console.log(`Downloaded favicon for ${raindrop.link} to ${output}`)
         } catch (e) {
             console.log(e)
