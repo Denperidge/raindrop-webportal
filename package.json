@@ -10,10 +10,10 @@
     "data": "node .raindrop.js"
   },
   "dependencies": {
-    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy": "^3.1.2",
     "@grimlink/eleventy-plugin-sass": "^1.0.3",
     "dotenv": "^16.4.7",
-    "eleventy-auto-cache-buster": "^0.8.1",
+    "eleventy-auto-cache-buster": "^0.8.3",
     "eleventy-favicons": "^1.0.3",
     "favicon-grabber": "^0.4.1",
     "sass": "^1.85.1"
