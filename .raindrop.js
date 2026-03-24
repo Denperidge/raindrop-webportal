@@ -4,7 +4,7 @@ import { env } from "process"
 import { writeFile } from "fs";
 
 const DATA_DIR = "raindrops/";
-const REGEX_GET_COLLECTIONS = RegExp(/(?<=vite-plugin-ssr_pageContext.*?>).*?(?=<\/script>)/)
+const REGEX_GET_COLLECTIONS = RegExp(/vike_pageContext.*?>(?<data>.*?)<\/script>/)
 
 async function getRaindropCollectionData(raindropUrl, filename="index") {
     let raindropCollectionHtml;
@@ -16,12 +16,13 @@ async function getRaindropCollectionData(raindropUrl, filename="index") {
         throw e;
     }
 
-    const raindropCollectionData = JSON.parse(
-        raindropCollectionHtml.match(
-            REGEX_GET_COLLECTIONS
-        )[0]
-    );
-    const relevantRaindrops = raindropCollectionData.pageContext.pageProps.raindrops.items;
+    const reqData = raindropCollectionHtml.match(REGEX_GET_COLLECTIONS);
+
+    if (!reqData.groups || !Object.keys(reqData.groups).includes("data")) {
+        throw new Error("Couldn't find collections from HTML");
+    }
+    const raindropCollectionData = JSON.parse(reqData.groups.data.replace(/\\\\/g, "\\"))
+    const relevantRaindrops = raindropCollectionData.data.raindrops.items;
 
     const dest = DATA_DIR + filename + ".json";
     writeFile(

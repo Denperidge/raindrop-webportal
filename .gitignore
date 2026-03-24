@@ -3,4 +3,5 @@ node_modules/
 raindrops/*.json
 src/_assets/*.ico
 src/_assets/*.png
+src/_assets/*.svg
 dist/

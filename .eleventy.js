@@ -49,7 +49,7 @@ function getPageCollectionData(collectionName) {
     return {raindrops, tags, raindropsByTags}
 }
 const pages = [];
-const entries = env.RAINDROP_URLS.split(",", 2);
+const entries = env.RAINDROP_URLS.split(",");
 for (let i = 0; i < entries.length; i++) {
     const [pageName, url] = entries[i].split("@", 2);
     const collectionData = await getPageCollectionData(pageName)
