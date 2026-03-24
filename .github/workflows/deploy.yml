@@ -35,20 +35,21 @@ jobs:
           # Select latest ref instead of event trigger, in case this is triggered by another event
           ref: ${{ github.ref }}
       - uses: actions/setup-node@v4
+      - uses: pnpm/action-setup@v5
           
       - name: Setup Pages
         uses: actions/configure-pages@v5
         
       - name: Install pre-requirements
-        run: npm ci
+        run: pnpm install
       
       - name: Fetch data from Raindrop.io
-        run: npm run data
+        run: pnpm data
         env:
           RAINDROP_URLS: ${{ secrets.RAINDROP_URLS }}
       
       - name: Build
-        run: npm run build
+        run: pnpm build
         env:
           RAINDROP_URLS: ${{ secrets.RAINDROP_URLS }}
           RWP_TITLE: ${{ secrets.RWP_TITLE }}
