@@ -1,0 +1,21 @@
+# Block git repo/tarball sources for indirect dependencies
+# https://pnpm.io/settings#blockexoticsubdeps
+blockExoticSubdeps: true
+
+# Disable hoisting
+# https://pnpm.io/blog/2020/10/17/node-modules-configuration-options-with-pnpm#a-strict-traditional-modules-directory
+hoist: false
+# Minimum release age
+minimumReleaseAge: 4320 # in minutes
+
+# Block install scripts
+# https://pnpm.io/settings#strictdepbuilds
+strictDepBuilds: true
+allowBuilds:
+  chokidar: true
+  sharp: true
+  "@parcel/watcher": true
+
+# Don't install newer versions if security measures decreased
+# https://pnpm.io/settings#trustpolicy
+trustPolicy: no-downgrade

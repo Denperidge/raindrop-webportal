@@ -52,14 +52,15 @@ This requires [Node.js](https://nodejs.org/) and [git](https://git-scm.com/) to 
 ```bash
 git clone https://github.com/Denperidge/raindrop-webportal.git
 cd raindrop-webportal
-npm install
+corepack enable  # Enable pnpm package manager
+pnpm install
 ```
 At this point, copy/rename the [.env.example](.env.example) to `.env` and modify its values to your liking.
 > Note: You probably want to have one entry in `RAINDROP_URLS` to have the name `index` (e.g. `index@https://raindrop.io/username/collection-32639013`). Index will be the landing page.
 ```bash
-npm start  # dev server on localhost:8080
-npm run data  # pull collection data from Raindrop.io
-npm run build  # Build static site to dist/
+pnpm start  # dev server on localhost:8080
+pnpm data  # pull collection data from Raindrop.io
+npm build  # Build static site to dist/
 ```
 And that's it!
 

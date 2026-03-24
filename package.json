@@ -9,6 +9,11 @@
     "build": "eleventy",
     "data": "node .raindrop.js"
   },
+  "pnpm": {
+    "overrides": {
+      "chokidar": "^5.0.0"
+    }
+  },
   "dependencies": {
     "@11ty/eleventy": "^3.0.0",
     "@grimlink/eleventy-plugin-sass": "^1.0.3",
@@ -16,6 +21,6 @@
     "eleventy-auto-cache-buster": "^0.8.1",
     "eleventy-favicons": "^1.0.3",
     "favicon-grabber": "^0.4.1",
-    "sass": "^1.85.1"
+    "sass": "^1.98.0"
   }
 }
