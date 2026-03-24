@@ -23,7 +23,7 @@ function onTagChange(tagInputId, tagInputChecked) {
         dynamicStyle.innerText = "";
     } else {
         let style = ".link:not(." + enabledTags.join(".") + ") { opacity: 0.4; }";
-        style += " nav"
+        style += " main nav"
         for (let i=0; i < enabledTags.length; i++) {
             style += ":not(#" + enabledTags[i] + ")"
         }
