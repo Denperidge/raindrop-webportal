@@ -1,10 +1,11 @@
 import 'dotenv/config';
-import downloadFavicon, { downloadFaviconFromWebpage, downloadFaviconFromDuckduckgo } from "favicon-grabber";
 import { env } from "process"
 import { writeFile } from "fs";
+import { extname } from 'path';
+import metafetch from 'metafetch';
 
 const DATA_DIR = "raindrops/";
-const REGEX_GET_COLLECTIONS = RegExp(/(?<=vite-plugin-ssr_pageContext.*?>).*?(?=<\/script>)/)
+const REGEX_GET_COLLECTIONS = RegExp(/vike_pageContext.*?>(?<data>.*?)<\/script>/)
 
 async function getRaindropCollectionData(raindropUrl, filename="index") {
     let raindropCollectionHtml;
@@ -16,12 +17,13 @@ async function getRaindropCollectionData(raindropUrl, filename="index") {
         throw e;
     }
 
-    const raindropCollectionData = JSON.parse(
-        raindropCollectionHtml.match(
-            REGEX_GET_COLLECTIONS
-        )[0]
-    );
-    const relevantRaindrops = raindropCollectionData.pageContext.pageProps.raindrops.items;
+    const reqData = raindropCollectionHtml.match(REGEX_GET_COLLECTIONS);
+
+    if (!reqData.groups || !Object.keys(reqData.groups).includes("data")) {
+        throw new Error("Couldn't find collections from HTML");
+    }
+    const raindropCollectionData = JSON.parse(reqData.groups.data.replace(/\\\\/g, "\\"))
+    const relevantRaindrops = raindropCollectionData.data.raindrops.items;
 
     const dest = DATA_DIR + filename + ".json";
     writeFile(
@@ -40,22 +42,20 @@ async function getRaindropCollectionData(raindropUrl, filename="index") {
 async function getRaindropFavicons(raindropArray) {
     for (let i = 0; i < raindropArray.length; i++) {
         const raindrop = raindropArray[i];
-        const overrides = {};
-        let downloadFunc = downloadFavicon;
-
-        if (raindrop.link.includes("transreads", "https://transreads.org/")) {
-            downloadFunc = downloadFaviconFromWebpage        
-        } else if (raindrop.link.includes("queerjs")) {
-            overrides.searchMetaTags = true;
-            overrides.ignoreContentTypeHeader = true;
-        } else if (raindrop.link.includes("https://beeldbank.kortrijk.be/portal/media")) {
-            downloadFunc= downloadFaviconFromDuckduckgo;
-        }
-
         try {
-            const output = await downloadFunc(raindrop.link, `src/_assets/${raindrop._id}%extname%`, overrides)
-            console.log(`Downloaded favicon for ${raindrop.link} to ${output}`)
+            const faviconUrl = (await metafetch.fetch(raindrop.link, {retries: 3, render: true})).favicon;
+            const faviconReq = await fetch(faviconUrl)
+            if (faviconReq.status >= 400) {
+                console.warn(`Couldn't find favicon for ${raindrop.link} (status: ${faviconReq.status}, favicon url: ${faviconUrl})`)
+                continue
+            }
+            const output = "src/_assets/" + raindrop._id + extname(faviconUrl).split("?")[0];
+            writeFile(output, await faviconReq.bytes(), {encoding: "utf-8"}, (err) => {
+                if (err) { throw err };
+                console.log(`Downloaded favicon for ${raindrop.link} to ${output}`)
+            })
         } catch (e) {
+            console.error("Error when fetching favicon for " + raindrop.link)
             console.log(e)
         }
     };

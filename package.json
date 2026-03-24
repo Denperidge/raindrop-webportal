@@ -16,6 +16,8 @@
     "eleventy-auto-cache-buster": "^0.8.1",
     "eleventy-favicons": "^1.0.3",
     "favicon-grabber": "^0.4.1",
+    "metafetch": "^5.0.4",
+    "puppeteer": "^24.40.0",
     "sass": "^1.85.1"
   }
 }
