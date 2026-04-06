@@ -4,4 +4,6 @@ raindrops/*.json
 src/_assets/*.ico
 src/_assets/*.png
 src/_assets/*.svg
+src/_assets/*.jpg
+src/_assets/*.jpeg
 dist/

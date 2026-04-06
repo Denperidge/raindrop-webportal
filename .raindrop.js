@@ -5,12 +5,17 @@ import { writeFile } from "fs";
 
 const DATA_DIR = "raindrops/";
 const REGEX_GET_COLLECTIONS = RegExp(/vike_pageContext.*?>(?<data>.*?)<\/script>/)
+const REGEX_NEXT_PAGE_DISABLED = RegExp(/<a[^<]*?title="Next page"[^>]*?data-variant="disabled"[^>]*?>/)
 
-async function getRaindropCollectionData(raindropUrl, filename="index") {
+async function getRaindropCollectionData(raindropUrl, filename="index", page=0, relevantRaindrops=[]) {
     let raindropCollectionHtml;
     try {
-        const data = await fetch(raindropUrl);
+        // I'm not quite sure why the website breaks when you add a ? for the params but I'll make it
+        if (!raindropUrl.endsWith("/")) { raindropUrl += "/"};
+        const reqUrl = `${raindropUrl}sort=-sort&perpage=50&page=${page}`;
+        const data = await fetch(reqUrl);
         raindropCollectionHtml = await data.text();
+        console.log(reqUrl)
     } catch (e) {
         console.error(`Couldn't finish getting data from ${raindropUrl}`);
         throw e;
@@ -22,18 +27,27 @@ async function getRaindropCollectionData(raindropUrl, filename="index") {
         throw new Error("Couldn't find collections from HTML");
     }
     const raindropCollectionData = JSON.parse(reqData.groups.data.replace(/\\\\/g, "\\"))
-    const relevantRaindrops = raindropCollectionData.data.raindrops.items;
+    relevantRaindrops = relevantRaindrops.concat(raindropCollectionData.data.raindrops.items);
 
-    const dest = DATA_DIR + filename + ".json";
-    writeFile(
-        dest,
-        JSON.stringify(relevantRaindrops),
-        { encoding: "utf-8" },
-        (e) => {
-            if (e) { throw e; }
-            else { console.log("Done! Wrote to " + dest); }
-        }
-    );
+    // Check if button exists & isn't disabled
+    if (raindropCollectionHtml.includes("Next page") && !raindropCollectionHtml.match(REGEX_NEXT_PAGE_DISABLED)) {
+        console.log(`Found another page! Requesting page ${page+1}`);
+        relevantRaindrops = await getRaindropCollectionData(raindropUrl, filename, page+1, relevantRaindrops);
+    }
+
+    if (page == 0){
+        console.log("Writing...")
+        const dest = DATA_DIR + filename + ".json";
+        writeFile(
+            dest,
+            JSON.stringify(relevantRaindrops),
+            { encoding: "utf-8" },
+            (e) => {
+                if (e) { throw e; }
+                else { console.log("Done! Wrote to " + dest); }
+            }
+        );
+    }
 
     return relevantRaindrops;
 }

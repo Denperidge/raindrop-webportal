@@ -15,7 +15,7 @@ function generateFaviconDict(dir) {
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
         const ext = extname(file);
-        if ([".png", ".ico"].includes(ext.toLowerCase())) {
+        if ([".png", ".ico", ".jpg", ".jpeg", ".svg"].includes(ext.toLowerCase())) {
             output[basename(file, ext)] = file;
         }
     }
